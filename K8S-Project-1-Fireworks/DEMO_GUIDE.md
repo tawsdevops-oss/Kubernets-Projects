@@ -32,6 +32,9 @@ Navigate to the `K8S-Project-1-Fireworks` directory and build the Docker image.
 ```powershell
 docker build -t fireworks-app:latest .
 ```
+### 3.Method 1 (BEST): Load image into Minikube
+
+minikube image load fireworks-app:latest
 
 ### 4. Deploy Kubernetes Manifests
 Apply all the configuration files (Secret, ConfigMap, PVC, Deployment, Service) at once.
@@ -71,7 +74,6 @@ If you update your HTML/JS code, follow these steps to see the changes:
 ```powershell
 kubectl logs -l app=mysql
 ```
-
 ---
 
 ## 👨‍💻 Credits

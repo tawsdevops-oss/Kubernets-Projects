@@ -1,0 +1,97 @@
+Enable Ingress in Minikube
+minikube addons enable ingress
+Check Ingress Controller
+kubectl get pods -n ingress-nginx
+Get Minikube IP
+minikube ip
+
+Example:
+
+192.168.49.2
+Add Hosts Entry
+Windows
+
+Edit:
+
+C:\Windows\System32\drivers\etc\hosts
+
+Add:
+
+192.168.49.2 fireworks.local
+Linux/Mac
+sudo vi /etc/hosts
+
+Add:
+
+192.168.49.2 fireworks.local
+
+Apply All Files
+kubectl apply -f configmap.yaml
+kubectl apply -f secret.yaml
+kubectl apply -f pvc.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl apply -f ingress.yaml
+Verify
+Pods
+kubectl get pods
+Services
+kubectl get svc
+Ingress
+kubectl get ingress
+
+Expected:
+
+NAME                 HOSTS
+fireworks-ingress    fireworks.local
+Test Application
+
+Open browser:
+
+http://fireworks.local
+
+Your Fireworks application should open.
+
+Complete Architecture
+Browser
+   ↓
+Ingress
+   ↓
+fireworks-service
+   ↓
+fireworks-app Pod
+   ↓
+mysql Service
+   ↓
+mysql Pod
+
+#########################################################
+
+Another Option
+
+Check which process uses 8080.
+
+Run CMD as Administrator:
+
+netstat -ano | findstr :8080
+
+You will see PID.
+
+Example:
+
+TCP    0.0.0.0:8080    LISTENING    1234
+
+Kill process:
+
+taskkill /PID 1234 /F
+
+Then retry:
+
+kubectl port-forward svc/fireworks-service 8080:8080
+Recommended Now
+
+Just use:
+
+kubectl port-forward svc/fireworks-service 9090:8080
+
+and test application quickly.
